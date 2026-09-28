@@ -6,7 +6,6 @@ CREATE TABLE users (
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
-
 CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
@@ -74,3 +73,51 @@ VALUES
     ('Atualizar apresentação pessoal',
      'Revisar informações do portfólio',
      'pendente', 'baixa', '2026-08-26', '2026-09-10', 2, 2);
+
+INSERT INTO tasks (titulo, project_id, user_id)
+VALUES ('Tarefa temporária', 1, 1)
+RETURNING id, titulo, status, prioridade;
+
+SELECT id, titulo, status, prioridade, data_prazo
+FROM tasks
+WHERE status <> 'concluido'
+ORDER BY data_prazo;
+
+UPDATE tasks
+SET status = 'concluido',
+    updated_at = NOW()
+WHERE titulo = 'Criar schema SQL';
+
+DELETE FROM tasks
+WHERE titulo = 'Tarefa temporária';
+SELECT id, titulo
+FROM tasks
+ORDER BY id;
+
+SELECT
+    t.id,
+    t.titulo AS tarefa,
+    p.nome AS projeto,
+    u.nome AS responsavel,
+    t.status,
+    t.prioridade,
+    t.data_prazo
+FROM tasks AS t
+INNER JOIN projects AS p
+    ON p.id = t.project_id
+INNER JOIN users AS u
+    ON u.id = t.user_id
+ORDER BY p.nome, t.data_prazo;
+
+SELECT
+    t.titulo AS tarefa,
+    p.nome AS projeto,
+    u.nome AS responsavel,
+    t.status
+FROM tasks AS t
+INNER JOIN projects AS p ON p.id = t.project_id
+INNER JOIN users AS u ON u.id = t.user_id
+WHERE t.prioridade = 'alta'
+  AND t.status <> 'concluido'
+ORDER BY t.data_prazo;
+
