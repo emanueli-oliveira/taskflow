@@ -49,15 +49,15 @@ CREATE TABLE tasks (
 
 INSERT INTO users (nome, email, senha_hash)
 VALUES
-    ('Ana Souza', 'ana@taskflow.com', 'hash_teste_ana'),
-    ('Bruno Lima', 'bruno@taskflow.com', 'hash_teste_bruno');
+    ('Emilly', 'emilly@taskflow.com', 'hash_teste_ana'),
+    ('Emanueli', 'emanueli@taskflow.com', 'hash_teste_bruno');
 
 INSERT INTO projects (nome, descricao, user_id)
 VALUES
     ('Projeto Integrador', 'Organização das entregas do semestre', 1),
     ('Portfólio Web', 'Construção do portfólio profissional', 2);
 
-INSERT INTO tasks
+    INSERT INTO tasks
     (titulo, descricao, status, prioridade,
      data_inicio, data_prazo, project_id, user_id)
 VALUES
