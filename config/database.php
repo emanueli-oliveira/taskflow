@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../src/helpers/response.php';
+
 define('DB_HOST', 'localhost');
 define('DB_PORT', '5432');
 define('DB_NAME', 'taskflow_ee');
@@ -12,13 +14,12 @@ try {
 
     // TODO 2: criar $pdo com DSN usuário senha e opções 
     $pdo = new PDO($dsn, DB_USER, DB_PASS, [
-	 	PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-	 	PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-	 	PDO::ATTR_EMULATE_PREPARES
-]);
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false
+    ]);
 
 } catch (PDOException $e) {
-    // TODO 4: devolver erro genérico com status 500
-    http_response_code(500);
-    exit('Erro interno no servidor.');
+    error_log($e->getMessage());
+    json_response(false, 'Erro interno no servidor.', null, 500);
 }

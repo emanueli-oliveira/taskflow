@@ -12,19 +12,14 @@ if ($metodo !== 'GET') {
 
 
 try {
-    // TODO: preparar o $sql com o SELECT sem a coluna senha_hash
-    $sql = 'SELECT id, nome, email FROM userss';
+    $sql = 'SELECT id, nome, email FROM users';
     $stmt = $pdo->prepare($sql);
 
-    // TODO: executar a instrução
-	$stmt->execute();
-    // TODO: recuperar todas as linhas
-    $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    $stmt->execute();
+    $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // TODO: responder com os usuários utilizando a função json_response 
-    json_response(true, 'Usuários recuperados com sucesso.', $usuarios, 200);
+    json_response(true, 'Usuários recuperados com sucesso.', $usuarios);
 } catch (PDOException $e) {
-    // TODO: responder com erro e status 500 com a função json_response
-    json_response(false, 'Usuários não encotrados', null, 500);
+    error_log($e->getMessage());
+    json_response(false, 'Erro interno ao buscar usuários.', null, 500);
 }
-
