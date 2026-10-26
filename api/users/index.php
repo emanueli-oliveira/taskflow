@@ -1,7 +1,10 @@
 <?php
 
 require_once __DIR__ . '/../../src/helpers/response.php';
+require_once __DIR__ . '/../../src/helpers/auth.php';
 require_once __DIR__ . '/../../config/database.php';
+
+verificar_autenticacao();
 
 $metodo = $_SERVER['REQUEST_METHOD'];
 
