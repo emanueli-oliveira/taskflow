@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{base_url}}/api/auth/register.php"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"usuário\",\r
+
+    \  \"email\": \"usuario@email.com\",\r
+
+    \  \"senha\": \"12345678\"\r
+
+    }"
+order: 2000

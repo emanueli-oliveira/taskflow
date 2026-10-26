@@ -1,0 +1,14 @@
+$kind: http-request
+description: ""
+url: "{{base_url}}/api/projects/index.php"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Taskflow\",\r
+
+    \  \"descricao\": \"Projeto de teste\"\r
+
+    }"
+order: 1000
