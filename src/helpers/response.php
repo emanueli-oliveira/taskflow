@@ -7,6 +7,7 @@ function json_response(
     int $codigo = 200
 ): void {
     http_response_code($codigo);
+
     header('Content-Type: application/json; charset=utf-8');
 
     $resposta = [
@@ -17,6 +18,7 @@ function json_response(
     if ($dados !== null) {
         $resposta['dados'] = $dados;
     }
+
     echo json_encode($resposta, JSON_UNESCAPED_UNICODE);
     exit();
 }
